@@ -1,0 +1,800 @@
+<div class="container">
+   <h2>How JS works? how execte?</h2>
+    <p>Everthing inside JS happens inside an <b>Execution Context</b> -  </p>
+    <p>EXecContext is like a big box it has two components 1- Memory this is the place where variables and functions stored, 2- code -> code execute one line at a time </p>
+    <div style="display:flex; gap:10px;align-items: center;">
+        <img src="../../../../assets/images/b1.png" style="width:30%;"/>
+        <ul>
+            <li>Mermory component is also called as variable environment</li>
+            <li>Code component is also called as thread of execution</li>
+        </ul>
+    </div>
+    <hr/>
+   <h2>Is JS Synchronous or Asynchronous?</h2>
+   <h2>Is JS single Threaded or Multi-threaded?</h2>
+    <p>JS is a <b>synchronous sigle-threaded</b>  language</p>
+    <ul>
+        <li><b>sigle-threaded:</b> JS can executete one command at a time</li>
+        <li>It goes to next line when one line get finished executing</li>
+    </ul>
+    <hr/>
+   <h2>What happens when you run JS code?</h2>
+   <ul>
+    <li>2 phases 1- Memeory Execution Phase, 2 - Code Execution Phase </li>
+    <li>lst phase it reads all line and allocate mermory to variable and function</li>
+    <li>Initially variable stored as undefined</li>
+    <li>for function it stores hole code copied to memory </li>
+   </ul>
+   <div style="display:flex;">
+   <img src="../../../../assets/images/b3.png" style="width:30%;"/>
+   <img src="../../../../assets/images/b2.png" style="width:30%;"/>
+    </div>
+
+    <ul>
+        <li>2 nd phase code execution i read line by line in line 1 it will assign value 2 to memeory</li>
+        <li>line2-5 nothing to execute</li>
+        <li>line 6 function execution new execution context is created</li>
+        <li>again 2 phases, memory, code - memory allocated to num, var </li>
+        <li>num - parameter value n - argument 2 is passed to num</li>
+        <li>ans will be 4 when return comes it will tell ctrl you done with work return the value where the func was invoked. </li>
+        <li>replace square2 with value 4</li>
+        <li>once it reurs the value the whole thing will be deleted.</li>
+        <li>Once the program execution is completed the whole global execution context is deleted</li>
+        <li>it will create global stack tree</li>
+        <li>after that first execution completed it moves out and next second content exection comes in once second completed it moves out and last global one. by this way only it managed by JS</li>
+        <li><b>Call stack maintains the order of execution of execution contexts</b></li>
+        <li>call stack is also known as 
+            <ul>
+                <li>Execution context stack</li>
+                <li>Program stack</li>
+                <li>Control stack</li>
+                <li>Runtime stack</li>
+                <li>Machine stack</li>
+            </ul>
+        </li>
+    </ul>
+    <img src="../../../../assets/images/b4.png" style="width:30%;"/>
+    <hr>
+
+    <h2>Hoisting in JS</h2>
+   
+    <pre>
+        var x = 7;
+        
+        function getName() &#10100;
+            console.log("welcome JS");
+        &#x2775;
+
+        getName();
+        console.log(x);
+        console.log(getName);
+    </pre>
+    <ul>
+        <li>regular ouput will be
+            <pre>
+                Welcome JS
+                7
+            </pre>
+        </li>
+    </ul>
+    <p>we move function invocation to top of the file</p>
+
+    <pre>
+        getName();
+        console.log(x);
+
+        var x = 7;
+        
+        function getName() &#10100;
+            console.log("welcome JS");
+        &#x2775;
+    
+    </pre>
+    <ul>
+        <li>we are trying to acess get name and value of x before initizing if you see the result </li>
+    </ul>
+
+    <pre>
+        welcome JS
+        undefined
+    </pre>
+    
+    <p>Even before code start execution memeory is allocated for all variables and functions</p>
+
+    <p>this because when JS execute code it create execution context and intilize the variable and function variable value as undefined and for function copy code so that function it bwill print out put but for x it showing undefined.</p>
+
+    <p>suppose i remove line var x = 7 -> now the result will be</p>
+    <pre>
+        welcome JS
+        Uncought ReferenceError: x is not defined
+    </pre>
+
+    <p> Same thing here intialls when JS executes it will read all line first there there is no value x and it will not be initlized in memeory in second time when it comes to execution phase it will show error if it read for first time it will show as undefined since it is in memory.</p>
+
+    <pre>
+        console.log(getName);
+
+        function getName() &#10100;
+            console.log("welcome JS");
+        &#x2775;
+
+    </pre>
+
+    <p>what will be the output? -> it prints the function lines since it is there in memory.</p>
+    <p> we can check by break point in first line-> check in callstack -> there x and all functions </p>
+    <p>we can also see the call stack tree by puting breakpoint.</p>
+    <p>D/B not defined-> decleartion not here in code  and undefined ->  declearation is below the initlization</p>
+
+    <p>suppose we change that in to arrow function </p>
+    <pre>
+
+        console.log(getName);
+
+        var getName = () => &#10100;
+            console.log("welcome JS");
+        &#x2775;
+    </pre>
+
+    <p>output will be</p>
+    <pre>
+        Uncaught TypeError: getName is not a function
+    </pre>
+
+
+
+    <p>This will be considered as variable and initial value will be un defined so it say s not a function</p>
+
+    <pre>
+        console.log(getName);
+
+        function getName() &#10100;
+            console.log("welcome JS");
+            &#x2775;
+
+    </pre>
+    <p>if you write in this syntax it will copy the code lines and print func</p>
+    <p> there is another way to declare function </p>
+    <pre>
+        console.log(getName);
+        var getName() = function ()  &#10100;
+            console.log("welcome JS");
+            &#x2775;
+
+    </pre>
+
+    <p>this will also whows undefined no function since its considered as variable</p>
+
+    <p>call stack tree can seen in console debugging under source</p>
+    <p>when the control comes to new function initlization it will create execution context and pushed into stack tree and once function exection completed it moved out from stack tree</p>
+
+    <img src="../../../../assets/images/b5.png" style="width:30%;"/>
+    <hr/>
+
+    <h3>Function exection in stack tree</h3>
+    <img src="../../../../assets/images/f1.png" style="width:30%;"/>
+    <hr/>
+    <h3>Shortest JS program window and this key word</h3>
+    <p>No code empty file is the shortest program in JS</p>
+    <p>when we have a empty file and when we execute that file JS engine create global execution context along with window object and this </p>
+    <p>this points window (this === window) when nwe type in console it will print true, when we type window in console we can see window object, same as type this press enter we can see window object</p>
+    <p>anything which is not inside function is global space eg</p>
+    <pre>
+        var a =10;
+        function b() &#10100;
+            var x =10;
+            &#x2775;
+    </pre>
+    <p>Here a, func b is in  global spacebut x is not in global space it's inside the function</p>
+    <p> when we see that in console type window we see window object expand that we can see a:10, b: fb() but not x</p>
+    <p>we can acess the window object by console.log(window.a); we get value as 10</p>
+    <p>we can put like this also console.log(a); it will assume as window object(global object) and take from there</p>
+    <p>if we give console.log(this.a) output will be same 10, window, this all refers same in memeory space </p>
+    <hr/>
+    <h2>Undefined vs not defined in JS</h2>
+    <pre>
+        console.log(a);
+        var a= 7;
+        console.log(x);
+    </pre>
+
+    <p>when we put break point in first line type console with a it will give undefined but for x it will show as not defined</p>
+    <p>while passing the dbugger we can type in console to get that particlar state values.</p>
+    <p>undefined -> JS engine allocate placeholder for a</p>
+    <p>not defined which is not allocated memeory</p>
+    <p>JS is a looseley type language -> if we asign a= 1 later we can assign a as string .. but in othe lange like c we can assign string it only hold string and it will not hold number etc... strict type </p>
+    <pre>
+        var a;
+        console.log(a);
+        a=10;
+        console.log(a);
+        a="hello...";
+        console.log(a);
+    </pre>
+    <p>out put will be</p>
+    <pre>
+        undefined
+        10
+        hello...
+    </pre>
+<p>we should not give <b> a = undefined;</b> not a good practice</p>
+<hr/>
+<h2>Scope Chain</h2>
+<p>scope is directly dependent on the lexical environment</p>
+
+<pre>
+    function a() &#10100;
+        console.log(b);
+    &#x2775;
+
+    var b =10;
+    a();
+</pre>
+<p>when it reaches log b it try to find out weather b exist in local memeory space or not  ie, a 's local memeory context it wont be there </p>
+<p>the out put is 10</p>
+
+<pre>
+    function a() &#10100;
+        function c() &#10100;
+            console.log(b);
+        &#x2775;
+     &#x2775;
+    var b = 10;
+    a();
+</pre>
+<p>output also 10</p>
+
+<pre> 
+    function a() &#10100;
+        var b = 10;
+        c();
+        function c() &#10100;
+            console.log(b);
+        &#x2775;
+    &#x2775;
+
+    a();
+    console.log(b);
+</pre>
+
+<p>this will show b as not defined</p>
+<p>what is the scope of variable b => where can i acess the variable b</p>
+<p>Is b inside the scope of func c ? => can i acess b inside c</p>
+<img src="../../../../assets/images/c1.png" style="width:50%;"/>
+<p>where ever the exection context is created , a lexical environment is also created</p>
+<p><b>lexical environment is the local memeory along with the lexical environment of its parent.</b></p>
+<p>lexical means -> in term herarchy or in sequence </p>
+<p>you can say c function is lexicaly sitting inside a function. => in order or in herarchy</p>
+<p><b>Where the code is present physicaly</b></p>
+<p>Global level reference to outer level point to null has no parent</p>
+<p> it will check if b present in local memenry of c it wont find then goes to the lexical enviromemt of its parent a  it find out b over there then print b</p>
+<p>if supose not there in a it will look for global lexical envionment if thre also not found it move to it's parent that is null so it will print as not defined.'</p>
+<p><b>If JS engine does not find anything in local memeory it goes next level of scope chain there also it not find find anything it goes to next level ... this way of finding is called scope chain..</b></p>
+<ul>
+    <li>lexical env is created when ever execution context is created</li>
+    <li>lexical environment is the local memeory along with the lexical environment of its parent.</li>
+</ul>
+<p>Here what is the lexical enviroment of a -> local + lexical env of a is global</p>
+<img src="../../../../assets/images/c2.png" style="width:50%;"/>
+<hr/>
+<h2>Let & Const Temporal Dead Zone?</h2>
+<ul>
+    <li>What is Temporal Dead Zone</li>
+    <li>Are Let & const declarations hoisted?</li>
+    <li>SyntaxErrorvs Reference error vs TypeError?</li>
+</ul>
+<p>Yes Let & const declarations hoisted these are in temporal dead zone in the time being</p>
+
+<pre>
+    console.log(b);
+    let a = 10;
+    var b = 100;
+</pre>
+<p>memeory is allocated for this function when a single line is executed.we get b value as undefined because of hoisting </p>
+<p>when we try to get a value in console we get error as Reference error - cannot acess a before initialization</p>
+<img src="../../../../assets/images/l1.png" style="width:50%;"/>
+<p><b>memeory was assined to var (b) and attached to global object but in case of let and const they are also allocated memeory thtat is called hoisting but they are stored in different memeory space thatn global called script, we cannot acess let and const decleartion before puting some value in them </b></p>
+<p><b>Temporal Dead Zone -> It is the time since the let variable was hoisted and till it initlize some value, time between that is called Temporal Dead Zone </b></p>
+<p>Time b/w the let variable is hoisted and value initilzed to it(let a= 10) is called Temporal dead zone</p>
+<p><b>When our we try to acess variable inside the temporal dead zone it gives you a reference error.</b></p>
+<p>value of b is attached to window/ global object we can check this by chrome console and type (window.b or this.b) it will give value as 100</p>
+<pre>
+    let a = 10;
+    let a = 15;
+</pre>
+<p>let is title more strict than var no duplicate decleration it shows error as <b>SyntaxError - Identifier a has already been declared</b></p>
+<pre>
+    let a = 10;
+    var a = 100;
+</pre>
+<p>it will show error as <b>SyntaxError - Identifier a has already been declared</b>, we cannot use same name in the same scope again</p>
+<pre>
+    var b = 100;
+    var b = 20;
+</pre>
+<p>but in case of var it is valid to redeclare it will not show error</p>
+<p>const is more stric than let</p>
+<pre>
+    let a;
+    const b = 100;
+    a=10;
+    console.log(a);
+</pre>
+<p>We cannot do this initlization for const and later assign value for const , we need to give as const b = 50; initlize in the same line this is strict</p>
+<pre>
+    const b;
+    b = 70;
+</pre>
+<p>we get syntax error Missing initilizer in const declaration</p>
+<pre>
+    const b = 50;
+    b = 40;
+</pre>
+<p>It will show error as TypeError: Assignment to const variable.- because it was const type we are not able to re assign </p>
+
+<p><b>TypeError => const b = 20; b=10</b></p>
+<p><b>SyntaxError => const b;, let a= 10; let a = 15;</b></p>
+<p><b>ReferenceError => when JS engine try to find the specific variable inside memeory space and you cannot acess it</b> console.log(a); let a = 50;</p>
+<p><b>Not defined error</b> try to acess not defined variable console.log(y);</p>
+<p><b>what should wee use let const var</b> - const 1st place when ever you want to put some vale which will not change later, 2nd use let whre ever possiple </p>
+<p>Always use decleration and initilization on top is the best way</p>
+
+<hr/>
+<h2>Block, Scope, Shadowing in JS</h2>
+<p>we know let & const are <b>Block Scoped</b> what is block in JS?</p>
+<pre>
+    &#10100;
+
+    &#x2775;
+</pre>
+<p>block is aslso know as compound statement</p>
+<p><b>Block scope</b> -> what are the functions and variables acessed in side this block</p>
+<img src="../../../../assets/images/s1.png" style="width:50%;"/>
+<pre>
+    var a = 100;
+    &#10100;
+    var a = 10;
+    &#x2775;
+
+    console.log(a);
+</pre>
+<p>here value will be 10 not 100</p>
+<hr/>
+<h2>Clousers in JS</h2>
+<p><b>Function along with lexical scope bundled together forms a closure</b></p>
+<p>function return another function in JS</p>
+<pre>
+    function x() &#10100;
+        var a=7;
+        function y() &#10100;
+            console.log(a);
+         &#x2775;
+        return y;
+    &#x2775;
+    var z = x();
+    console.log(z);
+</pre>
+<p>it returns the whole function y not only code along with it lexical scope </p>
+<img src="../../../../assets/images/cl1.png" style="width:50%;"/>
+<hr/>
+<h2>setTimeout + Clousers</h2>
+<pre>
+    function x() &#10100;
+    var i = 1;
+    setTimeout(function () &#10100;
+        console.log(i);
+    &#x2775;, 3000); 
+    console.log('Welcome JS');
+    &#x2775;
+    x();
+</pre>
+<p>this function remembers reference to i it forms closure </p>
+<p>Here setTimeout do is it takes the callback function and store it in some place and attach timer 3000 millisecond to it and it procides futher code means here console... and once the timer expires it takes back the function and put again to call stack and runs it thats how setTimeout works.</p>
+<p>JS does not wait there for that 3000 milli seconds</p>
+<pre>
+    welcome JS
+    1
+</pre>
+<p>I need to write a JS program to print 1 after 1 sec ,2 after 2 sec,3 after 3 sec ... still 5 how would you do that?</p>
+
+<pre>
+    function x() &#10100;
+    for(var i=1; i<=5; i++) &#10100;
+        setTimeout(function () &#10100;
+            console.log(i);
+        &#x2775;, i * 1000); 
+    &#x2775;
+    console.log('Welcome JS');
+    &#x2775;
+    x();
+</pre>
+
+<p>i value will be 1,2,3.. 5 it print welcome JS and 1, 2, 3.. 5 for time and for delay we multiply i with 1000 milisec ie 1 sec</p>
+
+<p>but it desnot behave in that way it behaves differently it prints 6 for 5 times </p>
+<p>this working like this due to closures => closure is a function along with lexical environment even a function is taken out from it's orginal scope if tit execute in other scope still it rembers its lexical enviroment when set timeout takes the func and store some whwre and attach timer so that function remebers the i (it rember the reference to i not value of i) </p>
+<p>when the loop runs it makes copy of func attach timer and also remember the reference of i similerly this 5 copy of the function all pointing to same referenve of i </p>
+<p><b>Since Var i is pointing to global object (console.log(i) this i is pointing to same memory location )these 5 copy point to same i refrence, when JS engine runs the program it will set 5 copy along with timer attached and it moves on .. and when timer expires the value of i will be 6 because the loop was continuesly running so that only it print 6 for 5 times (5 copy refers same memery reference variable i)</b></p>
+
+<p>To fix this use let since let has block scope for every iteration i will be new variable new copy (this function forms new closure)</p>
+<pre>
+    function x() &#10100;
+    for(let i=1; i<=5; i++) &#10100;
+        setTimeout(function () &#10100;
+            console.log(i);
+        &#x2775;, i * 1000); 
+    &#x2775;
+    console.log('Welcome JS');
+    &#x2775;
+    x();
+</pre>
+<p><b>when we do i++ here i = 2 is a new copy of variable which forms a closure with setTimeout function , setTime takes new copy of i bounded to it and saves it next i = 3 .. new one keeps on doing it ..</b></p>
+<p><b>Each time setTimeout is called it refereing to different memeory location seperate copy of i which were in the scope.</b></p>
+
+<p><b>Why it not worked with var but worked with let is because let block scoped it creates new copy every time when loop is executed.</b></p>
+<p>Some of the smart interviver tell that we can't use let use var then what will you do? that time Clousers  will help you</p>
+<pre>
+    function x() &#10100;
+    for(var i=1; i<=5; i++) &#10100;
+        function close(x) &#10100;
+            setTimeout(function () &#10100;
+                console.log(x);
+            &#x2775;, x * 1000); 
+        &#x2775; 
+        close(i)   
+    &#x2775;
+    console.log('Welcome JS');
+    &#x2775;
+    x();
+</pre>
+<p>every time setTimeout we call close of i it will create new copy of i itself over here </p>
+<hr>
+<h2>Clousers JS Interview Techinical section</h2>
+<p>Iinterview: Can you pls let me know what is closure in JS?</p>
+<p>Candidate: A function along with reference with it's outer environment together forms a closure in other words closure is a compination of function and its lexical scope buldled together forms a closure</p>
+<p>I: Can you explain little bitbmore about it?</p>
+<p>C: each function JS has it acess to outer lexlical environment it's like acess to variable and functions present in parent, when a function executed in some other scope not in  orginal scope still remeber outer enviroment variables and func that is what closure is.</p>
+<p>I: can you give tittle example what you said</p>
+<pre>
+    function outer() &#10100;
+        var a = 10;
+        function inner() &#10100;
+            console.log(a);
+        &#x2775;
+    &#x2775;
+</pre>
+<p>C: yes definitely give an example let me share my screen is it visible? Suppose we have a nested function lets call it as outer inside we we have a function as inner actualy in JS inner function has acess to outer func if i create a variable in outer enevironment lets call it a = 10 , so this inner fun has acess to a variable some we can do console this inner func along with its lexlical outer environment is called closure</p>
+<pre>
+  function outer() &#10100;
+      var a = 10;
+      function inner() &#10100;
+          console.log(a);
+      &#x2775;
+      return inner;
+  &#x2775;
+  outer()();
+</pre>
+
+<p>C: main part of closure is if i returns inner fun outside from this fun and try to acess outside the func it still remeber what the value of a if i do Outer()(); it will print 10</p>
+<p>I: what did you do with 2 parathesis in line no 8?</p>
+<p>C: this paranthesis is like calling the inner function if i have to modify this i can do something like this</p>
+<pre>
+  var close = outer();
+  close()
+</pre>
+<p>I: what would if i move var a = 10 before return then what is result?
+</p>
+<pre>
+  function outer() &#10100;
+      function inner() &#10100;
+          console.log(a);
+      &#x2775;
+      var a = 10;
+      return inner;
+  &#x2775;
+  var close = outer();
+  close()
+</pre>
+<p>C: no no still it will form a closure it will work in the same way</p>
+<p>I: what if i change var to let in line no 6 will it make a difference? </p>
+<p>C: when we cange let a variable have has block scope we cannot acess let a outside but still it works in same way</p>
+<p>I: if an argument is passed to outer function how will it behave?</p>
+<pre>
+  function outer(b) &#10100;
+      function inner() &#10100;
+          console.log(a, b);
+      &#x2775;
+      var a = 10;
+      return inner;
+  &#x2775;
+  var close = outer('hello');
+  close()
+</pre>
+<p>C: it behave in same way it will print=> 10, "Hello"</p>
+<p>I: I have one more question here,if a function nested with another function  can we have a example for that</p>
+<pre>
+  function outest() &#10100;
+  var c = 20;
+    function outer(b) &#10100;
+        function inner() &#10100;
+            console.log(a, b, c);
+        &#x2775;
+        var a = 10;
+        return inner;
+    &#x2775;
+    return outer
+  &#x2775;
+  var close = outest()("hello");
+  close()
+</pre>
+<p>variable c still form closure with outer function</p>
+<p>I: if we have conflicting variable let a=10 outside the func wht will happen?</p>
+<pre>
+  function outest() &#10100;
+  var c = 20;
+    function outer(b) &#10100;
+        function inner() &#10100;
+            console.log(a, b, c);
+        &#x2775;
+        let a = 10;
+        return inner;
+    &#x2775;
+    return outer
+  &#x2775;
+  let a = 20;
+  var close = outest()("hello");
+  close()
+</pre>
+<p> it will print 10 as output if first line is not there it will take global outside it will take as 20 if that line also not there it will print as undefined.</p>
+<p>I: Can you now tell me few advantage of closures?</p>
+<p>C: it used in function currying, in higher order func , one more important it helps in data hiding and encapsulation</p>
+<p>I: can you tell little bit more about data hiding and encapsulation</p>
+<p>C: privacy other func cannot acess that</p>
+<p>I: can you just give me a example of that</p>
+<pre>
+  var couter = 0;
+  function incrementCounter() &#10100;
+    counter++;
+  &#x2775;
+</pre>
+<p>C: couter example we have a function increment the flow is anybody in the code can acess the couter variable and change it here comes data hiding in to picture</p>
+<pre>
+  function counter() &#10100;
+    var cout = 0;
+    function incrementCounter() &#10100;
+      count++;
+    &#x2775;
+  &#x2775;
+  console.log(count);
+</pre>
+<p>if somebody try to acess the cout from outside it cannot do show error.</p>
+<pre>
+  function counter() &#10100;
+    var cout = 0;
+    return function incrementCounter() &#10100;
+      count++;
+      console.log(count);
+    &#x2775;
+  &#x2775;
+  var counter1 = counter()
+  counter1()
+</pre>
+<p>when we return a func it form a closure and returns, counter1 calls counter it give acess to this incrementCounter function and this func has closure with count = 0 variable, so increment counter function will come under counter1 it will increment counter</p>
+<p> major advantage is cont is hidden kind of private variable</p>
+<p>Yes got it what you trying to say.</p>
+<p>when we make another counter it will be fresh counter it wont tuch the scope here</p>
+
+<pre>
+  function counter() &#10100;
+    var cout = 0;
+    return function incrementCounter() &#10100;
+      count++;
+      console.log(count);
+    &#x2775;
+  &#x2775;
+  var counter1 = counter()
+  counter1();
+
+  var counter2 = counter();
+</pre>
+<p>I: Is thia good way to make a counter? is you code like sclable? supose you have to  create decrement counter also how will you go and add that</p>
+<p>May be we can use constructor function and have seperate function for increment and decrement function should i show you in the code?</p>
+<pre>
+  function Counter() &#10100;
+    var count = 0;
+    this.incrementCounter = function () &#10100;
+      count++;
+      console.log(count);
+    &#x2775;
+    this.decrementCounter = function () &#10100;
+      count--;
+      console.log(count);
+    &#x2775;
+  &#x2775;
+
+  var counter1 = new Counter();
+  counter1.incrementCounter();
+</pre>
+<p>Since it is a constructor func we need to create new keyword here good naming convestion is to use capital letter C</p>
+<p>I: can you tell me the dis advantages of closure</p>
+<p>C:yes closure comes with disadvantage also there could be over consumption of memeory in closures those closed over variables are not garbage collected if not handled propery it can lead to memeory leaks, due to memory accumulation it can freze the browser</p>
+<p>I: what is the grpage collector what it will do?</p>
+<p>C: Garpage collector is like a program in browser or in the JS engine which frees up and utlize the memory  JS is basically a highlevel programing language in programing languages like c and c++ we developer how we allocate memory and delocate memory is up to developers in highlevel programin language like JS most of the work done by JS engine there is a grbage collector in JS  that garpage collector when ever there is some unused variables it frees out the memeory when ever this variables are no longer needed that is what garpage collector does.</p>
+<p>I: what are the relatin b/w grapage coloector and closure</p>
+<pre>
+  function a() &#10100;
+    var x = 0;
+    return function b () &#10100;
+      console.log(x);
+    &#x2775;
+  &#x2775;
+  var y = a();
+
+  y();
+</pre>
+<p>C: we have a function a and have a variable x =0; we have another function b if we try to use varable x inside function b if we return function b , now the func b forms closure with variable x if we call a function once the function executed it need to clear the x from memeory it no longer needed but  here xi refered by b function this x cannot be freed up., var y has the return function of b and b has the clouse of x variable that means x memeory cannot be freed because we later some where we use y function, but some of moder browers v8 have smart garpage collector some how  find this variables are not reachable collect that variables</p>
+<p>I: what is this smartly collected garpage means what smart?</p>
+<p>C: lets assume one more variable z and z is not been used when b function is returned z is garbage collected smartly and x is not though x and z forms Clousers </p>
+<img src="../../../../assets/images/z1.png" style="width:50%;"/>
+<p>C: when put break point and try to type in console log of x  it give as 0 but for z it will say z is not defined zi sno longer in memery it is garpage collected</p>
+<hr/>
+<h2>Function</h2>
+<p>Function arae heart of JS</p>
+<br/>
+<h3>Function Statement</h3>
+<pre>
+    function a() &#10100;
+        console.log('a called');
+    &#x2775;
+
+    a();
+</pre>
+<br/>
+<h3>Function Expression</h3>
+<p> Function act like a value</p>
+<pre>
+    var b = function ()  &#10100;
+        console.log('b called');
+    &#x2775;
+
+    b();
+</pre>
+<br/>
+<p>D/B func expression and statement is hoeisting.</p>
+<pre>
+    a();
+    b();
+    function a() &#10100;
+        console.log('a called');
+    &#x2775;
+    var b = function ()  &#10100;
+        console.log('b called');
+    &#x2775;
+</pre> 
+<p>Iam calling function before creating it Here during the hoeisting/ memeory creation phase a is created memeory and this function is assigned to a, but in case of b it is treated like a variable  it is assigned undefined intially untill the code hits line itself then only function is asigned to variable b </p>
+<br/>
+<h3>Function Declaration</h3>
+<p>Function statement and declaration both are same.</p>
+<br/>
+<h3>Anonymous Function</h3>
+<p>Func without name is called anonyms func</p>
+<pre>
+    function () &#10100; 
+    &#x2775;
+</pre>
+<p>Anonymus func are used when a function are used as values (var b = function() ...)</p>
+<p>function statement we cannot use anonyms func</p>
+<br/>
+<h3>Named Function expression</h3>
+<p><b>Function expression</b> with named func is called named function expression </p>
+<pre>
+    var b = function xyz ()  &#10100;
+        console.log('b called');
+    &#x2775;
+
+    b();
+</pre>
+if we call xzy() seperately it will show error xyz is not defined 
+this xyz is created as local variable but created in outerscope (wheb function b() is called it create a variable undefined if we print funct xyz it will print inside console it will print but can acess since it it not created in outer scope.)
+
+<pre>
+    var b = function xyz ()  &#10100;
+        console.log(xyz);
+    &#x2775;
+
+    b();
+    xyz();
+</pre>
+
+<h3>D/b Parameters & Arguments</h3>
+<p><b>function arguments  b(1, 2)</b> the values which we passed inside function is called arguments</p>
+<p><b>function (param1, param2)</b> this function perameters - labele wich get those vales are called paramenters</p>
+<br/>
+<h3>First Class Functions</h3>
+<p>We can pass one function in to another function as argument , we can get in function b and print that in console </p>
+<pre>
+    <pre>
+        var b = function (param1)  &#10100;
+            console.log(param1);
+        &#x2775;
+    
+        b(function ()  &#10100;
+        
+        &#x2775; );
+    </pre> 
+</pre>
+<p>there is another way</p>
+<pre>
+    var b = function (param1)  &#10100;
+        console.log(param1);
+    &#x2775;
+
+    function xyz () &#10100;
+    
+    &#x2775;
+
+    b(xyz);
+</pre>
+<p>When we call a function we can return annonums function., if it is named function also we can return that too (return function xyz () &#10100;)</p>
+<pre>
+    var b = function (param1)  &#10100;
+        return function() &#10100;
+
+        &#x2775;    
+    &#x2775;
+
+    console.log(b());
+</pre>
+<p>The ability to use function as values, function passed as argument, return func from another function this ability is knowns as first class functions in JS</p>
+<p>First class citizen/ first class function - both are same.</p>
+<p>when these function calls with const let behaves in same way</p>
+<p>arrow func introduced in ES6</p>
+<hr/>
+<h2>Callback and Event listeners in JS</h2>
+<h3>What is a callback Function in JS</h3>
+<p>When we pass a func in to another funct => the func we pass to another func is clalled callback func</p>
+<br/>
+<h3>JS is a synchronous & single-threaded language</h3>
+<p>it can do one thing at a time in a specific order.<b>but using callback we can do async things in JS </b></p>
+<pre>
+    setTimeout(function() &#10100;
+        console.log("timer");
+    &#x2775;, 5000);
+
+    function x(y) &#10100;
+        console.log("x");
+        y();
+    &#x2775;
+    x(function y() &#10100;
+        console.log("y");
+    &#x2775;);
+</pre>
+<p>SetTimeout will take this function and store it in seperate place and it will attach a time 5000 millisecs, JS won't wait for setTimeout for finish over there <b>Callback func gives power os asncynerety</b> it doesnot wait here for 5000 milli sec, also we are passing func to be done after 5000 mill sec callback func</p>
+<p>It will see the function definition of x and try to call x function, it will pass y callback function in to y (func x (y)) it execute x console.log(x), we call y(); it print x, y and gooes on... when 5000 mili sec expires this callback fun executed and print timer => out put will be x, y ,after 5 sec  timer</p>
+<p>All operation run in one clall stack main to check we can put breakpoint and check the order of execution..</p>
+<img src="../../../../assets/images/set-1.png" style="width:50%;"/>
+<h3>Blocking the main thread</h3>
+<p>Any operation block this call stack that is known as blocking the main thread</p>
+<h3>Power of Callbacks?</h3>
+<p>If Js does not have first class function, function callback we could not do async operations.</p>
+<h3>Deep about Evenet listeners</h3>
+<pre>
+    <button id="clickMe">Click Me</button>
+     document.getElementById("clickMe").addEventListener("click", function xyz () &#10100;
+     console.log('event clicked');
+     &#x2775;) 
+</pre>
+<p>JS will get the ID and call event litener click in that time the function which is passed in click is the callback function, this callback func is stored some where and that automatically comes into our callstack </p>
+
+<h3>Clousures Demo with Event Listeners</h3>
+<p>suppose we have to know how many times the btn clicked we have to print that.</p>
+<pre>
+    <button id="clickMe">Click Me</button>
+    let count = 0;
+     document.getElementById("clickMe").addEventListener("click", function xyz () &#10100;
+     console.log('event clicked', ++count);
+     &#x2775;) 
+</pre>
+<img src="../../../../assets/images/clo1.png" style="width:50%;"/>
+<h3>Scope Demo with Evenet Listeners</h3>
+<h3>Garbage Collection & removeEventListeners</h3>
+</div>

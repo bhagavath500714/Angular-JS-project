@@ -1,0 +1,87 @@
+<p>events works!</p>
+<input type="text" (input)="handleInput($event);  value1=$any($event.target).value">
+<p>{{value}}</p>
+<p>{{value1}}</p>
+<hr/>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{title}}
+    </div>
+</div>
+<div class="panel-body">
+    <div class="table-responsoive">
+<table class="table table-stribed"> 
+    <thead>
+        <tr>
+            <th>info</th>
+            <th>name</th>
+            <th>title</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr [ngClass]='{"bg-success": e, "bg-danger": o, "bg-warning": f, "bg-info": l}'
+        *ngFor ="let movie of movies; let i=index, let o=odd; let e=even; let f=first; let l=last;">
+            <td>{{i+1}}</td>
+            <td>{{movie.name}}</td>
+            <td>{{movie.title}}</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+
+<hr/>
+<h4>ngSwitch</h4>
+<input type="text" [(ngModel)]="num">
+
+<div [ngSwitch]="num">
+    <div *ngSwitchCase="1">One</div>
+    <div *ngSwitchCase="2">Two</div>
+    <div *ngSwitchDefault>Default</div>
+</div>
+
+<hr/>
+<input type="checkbox" [(ngModel)]="showMe">
+<p *ngIf="showMe">Show me</p>
+<p *ngIf="!showMe">Hide me</p>
+
+<!-- then & else block -->
+<p *ngIf="showMe; then thenBlock; else elseBlock">click text</p>
+<ng-template #thenBlock>
+    <p>then block</p>
+</ng-template>
+
+<ng-template #elseBlock>
+    <p>else block</p>
+</ng-template>
+
+<hr/>
+<p>ngClass attribute selector</p>
+<div [ngClass]="['primary','big']"></div>
+
+<hr/>
+<p>Pipe</p>
+
+<p>Unformated date : {{toDate}}</p>
+<p>medium time in 12 hour format for default it is 24 hours</p>
+<p>Medium : {{toDate | date:'medium'}}</p>
+<p>Short - short format od date & time : {{toDate | date:'short'}}</p>
+<p>Fulldate - no time includes monday: {{toDate | date:'fullDate'}}</p>
+<p>Longdate - no time and no monday: {{toDate | date:'longDate'}}</p>
+<p>Longdate - no time and no monday: {{toDate | date:'longDate'}}</p>
+<p>shortDate: {{toDate | date:'shortDate'}}</p>
+<p>https://angular.io/api/common/DatePipe</p>
+<p>{{caseText | uppercase}}</p>
+<p>{{caseText | lowercase}}</p>
+<p>slicle to take particular word</p>
+<p> takes from index 0 to before 5 - {{caseText | slice:0: 5}}</p>
+<p> takes from index 3 to before 7 - {{caseText | slice:3: 7}}</p>
+<p> takes from last text reverse - {{caseText | slice:-6}}</p>
+<p>Currency pipe</p>
+<p>Currency US dolar {{price|currency}}</p>
+<p>Currency for india {{price|currency: 'INR'}}</p>
+<p>Currency for india {{price|currency: 'INR': false}}</p>
+<p>https://angular.io/api?query=pipe</p>
+
+<hr/>
+<app-form></app-form>

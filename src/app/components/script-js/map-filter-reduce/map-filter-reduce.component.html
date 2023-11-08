@@ -1,0 +1,48 @@
+<p>map-filter-reduce works!</p>
+<h3>Map</h3>
+<p>map used to transform array - each element in an array to get new value</p>
+<ul>
+    <li>Double</li>
+    <li *ngFor="let d of output">{{d}}</li>
+</ul>
+
+<ul>
+    <li>Binary</li>
+    <li *ngFor="let d of binaryOut">{{d}}</li>
+</ul>
+<hr>
+<h3>Filter - filter array based on some logic</h3>
+<ul>
+    <li>Odd no in array</li>
+    <li *ngFor="let d of fOutput">{{d}}</li>
+</ul>
+<hr>
+
+<h3>Reduce - take all element in a array and come out with single value out of them</h3>
+<p>eg to find the largent no in the array sum / max</p>
+<p>sum of arr - {{rOutput}}</p>
+<br/>
+<h4>Find max in array</h4>
+<p>Max value - {{maxOutput}}</p>
+<hr/>
+<h3>Real world exmaple for map with array comoine first and last name</h3>
+<ul>
+    <li>first Last name</li>
+    <li *ngFor="let n of rflnameOutput ">{{n}}</li>
+</ul>
+
+<h4>Need to find the age and how many people are of the same age - "{{ '{26: 1, 75: 1, 50: 1}' }}" with age 26, 2 people...</h4>
+<p> we go with reduce we need only one object with unique value </p>
+<p> we need to reduce arry to particular object (need to iterate the array and come up with single vale we go with reduce) </p>
+<div *ngFor="let age of ageOutput | keyvalue">
+    Age: {{ age.key }}, Count: {{ age.value }}
+</div>
+
+<hr/>
+<h4>Find the users first name whoes age is less than 30</h4>
+<ul>
+    <li>Names </li>
+    <li *ngFor="let d of filterNameOutput">{{d}}</li>
+</ul>
+<hr/>
+<h3> Same logic can be handled using reduce method</h3>

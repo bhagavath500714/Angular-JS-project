@@ -1,0 +1,6 @@
+<p>lifecycle works!</p>
+Title: <input type="text" [(ngModel)]="title" />
+<button (click)="addTitle()">Submit</button>
+<input type="checkbox" [(ngModel)]="showHead">
+
+<app-lifecycle-head *ngIf="showHead" [text]="titles"></app-lifecycle-head>

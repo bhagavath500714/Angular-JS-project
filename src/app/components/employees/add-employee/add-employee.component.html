@@ -1,0 +1,41 @@
+<div class="block">
+    <div class="digis-design-dialog-header">
+      <h1>Manage Columns</h1>
+      <button mat-icon-button mat-dialog-close>
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+    <form [formGroup]="booksForm" (ngSubmit)="bookSubmit()">
+    <mat-dialog-content class="mat-typography">
+        <!-- <mat-form-field class="inf_form_field" appearance="outline">
+            <input matInput placeholder="Start Address / Coordinates / GLID"  required d="saddress" name="saddress" formControlName="StartAddress">
+          </mat-form-field> -->
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Placeholder" required id="title" name="title" formControlName="title">
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Desc</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..." required id="description" name="description" formControlName="description"></textarea>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Page Count</mat-label>
+            <input matInput placeholder="Placeholder" required id="pageCount" name="pageCount" formControlName="pageCount">
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline" required>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" name="publishDate" formControlName="publishDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close type="button">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">Save</button>
+    </mat-dialog-actions>
+</form>
+  </div>

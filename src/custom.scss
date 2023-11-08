@@ -1,0 +1,28 @@
+*{margin:0;padding: 0;outline: none;@include box-sizing(border-box);}
+  // * {outline: none !important; @include box-sizing(border-box);}
+  @include font-face("Poppins-Regular","Poppins-Regular", $folder);
+  @include font-face("Poppins-Bold","Poppins-Bold",$folder);
+  @include font-face("Poppins-Medium","Poppins-Medium",$folder);
+  @include font-face("Poppins-SemiBold","Poppins-SemiBold",$folder);
+  @include font-face("Poppins-Light","Poppins-Light",$folder);
+
+//   container 
+
+.custom-container {
+    width: 100%;
+    max-width: 1200px; /* Set your desired maximum width */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding as needed */
+  
+    /* Media query for screens with a maximum width of 768px */
+    @media (max-width: 768px) {
+      max-width: 768px; /* Adjust the maximum width for smaller screens */
+      padding: 10px; /* Adjust padding for smaller screens */
+    }
+  
+    /* Media query for screens with a maximum width of 480px */
+    @media (max-width: 480px) {
+      max-width: 480px; /* Adjust the maximum width for even smaller screens */
+      padding: 5px; /* Adjust padding for smaller screens */
+    }
+  }
